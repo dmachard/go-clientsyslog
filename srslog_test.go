@@ -106,7 +106,7 @@ func startServer(n, la string, done chan<- string) (addr string, sock io.Closer,
 		// unix and unixgram: choose an address if none given
 		if la == "" {
 			// use ioutil.TempFile to get a name that is unique
-			f, err := ioutil.TempFile("", "syslogtest")
+			f, err := os.CreateTemp("", "syslogtest")
 			if err != nil {
 				log.Fatal("TempFile: ", err)
 			}
