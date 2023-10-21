@@ -5,7 +5,6 @@ import (
 	"crypto/tls"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"log"
 	"net"
 	"os"
@@ -105,7 +104,6 @@ func startServer(n, la string, done chan<- string) (addr string, sock io.Closer,
 	} else {
 		// unix and unixgram: choose an address if none given
 		if la == "" {
-			// use ioutil.TempFile to get a name that is unique
 			f, err := os.CreateTemp("", "syslogtest")
 			if err != nil {
 				log.Fatal("TempFile: ", err)
@@ -262,11 +260,11 @@ func TestDial(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping syslog test during -short")
 	}
-	f, err := Dial("", "", (LOG_LOCAL7|LOG_DEBUG)+1, "syslog_test")
+	f, _ := Dial("", "", (LOG_LOCAL7|LOG_DEBUG)+1, "syslog_test")
 	if f != nil {
 		t.Fatalf("Should have trapped bad priority")
 	}
-	f, err = Dial("", "", -1, "syslog_test")
+	f, _ = Dial("", "", -1, "syslog_test")
 	if f != nil {
 		t.Fatalf("Should have trapped bad priority")
 	}
@@ -421,7 +419,7 @@ func TestTLSCertWrite(t *testing.T) {
 			defer srvWG.Wait()
 			defer sock.Close()
 
-			cert, err := ioutil.ReadFile("test/cert.pem")
+			cert, err := os.ReadFile("test/cert.pem")
 			if err != nil {
 				t.Fatalf("cold not read cert: %v", err)
 			}
