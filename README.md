@@ -97,3 +97,11 @@ w, err := DialWithCustomDialer("custom", "192.168.0.52:514", syslog.LOG_ERR, "te
 ```
 
 Your custom dial func can set timeouts, proxy connections, and do whatever else it needs before returning a net.Conn.
+
+## Running Tests
+
+Run the tests as usual:
+
+```bash
+go test
+```
