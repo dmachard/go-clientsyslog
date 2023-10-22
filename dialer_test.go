@@ -93,7 +93,7 @@ func TestTLSDialer(t *testing.T) {
 	defer sock.Close()
 
 	pool := x509.NewCertPool()
-	serverCert, err := os.ReadFile("test/cert.pem")
+	serverCert, err := os.ReadFile("testdata/cert.pem")
 	if err != nil {
 		t.Errorf("failed to read file: %v", err)
 	}

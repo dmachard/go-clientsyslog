@@ -170,11 +170,9 @@ func (w *Writer) writeAndRetry(severity Priority, s string) (int, error) {
 func (w *Writer) writeAndRetryWithPriority(p Priority, s string) (int, error) {
 	conn := w.getConn()
 	if conn != nil {
-		n, err := w.write(conn, p, s)
-		if err != nil {
-			return 0, err
+		if n, err := w.write(conn, p, s); err == nil {
+			return n, err
 		}
-		return n, err
 	}
 
 	var err error

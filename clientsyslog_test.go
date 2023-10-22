@@ -128,7 +128,7 @@ func startServer(n, la string, done chan<- string) (addr string, sock io.Closer,
 			runPktSyslog(l, done)
 		}()
 	} else if n == "tcp+tls" {
-		cert, err := tls.LoadX509KeyPair("test/cert.pem", "test/privkey.pem")
+		cert, err := tls.LoadX509KeyPair("testdata/cert.pem", "testdata/privkey.pem")
 		if err != nil {
 			log.Fatalf("failed to load TLS keypair: %v", err)
 		}
@@ -286,7 +286,7 @@ func TestDialFails(t *testing.T) {
 }
 
 func TestDialTLSFails(t *testing.T) {
-	w, err := DialWithTLSCertPath("tcp+tls", "127.0.0.1:0", LOG_ERR, "syslog_test", "test/nocertfound.pem")
+	w, err := DialWithTLSCertPath("tcp+tls", "127.0.0.1:0", LOG_ERR, "syslog_test", "testdata/nocertfound.pem")
 	if w != nil {
 		t.Fatalf("Should not have a writer")
 	}
@@ -377,7 +377,7 @@ func TestTLSPathWrite(t *testing.T) {
 			defer srvWG.Wait()
 			defer sock.Close()
 
-			l, err := DialWithTLSCertPath("tcp+tls", addr, test.pri, test.pre, "test/cert.pem")
+			l, err := DialWithTLSCertPath("tcp+tls", addr, test.pri, test.pre, "testdata/cert.pem")
 			if err != nil {
 				t.Fatalf("syslog.Dial() failed: %v", err)
 			}
@@ -419,7 +419,7 @@ func TestTLSCertWrite(t *testing.T) {
 			defer srvWG.Wait()
 			defer sock.Close()
 
-			cert, err := os.ReadFile("test/cert.pem")
+			cert, err := os.ReadFile("testdata/cert.pem")
 			if err != nil {
 				t.Fatalf("cold not read cert: %v", err)
 			}
