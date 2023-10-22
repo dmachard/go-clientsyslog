@@ -26,7 +26,7 @@ func unixSyslog() (conn serverConn, err error) {
 			}
 		}
 	}
-	return nil, errors.New("Unix syslog delivery error")
+	return nil, errors.New("unix syslog delivery error")
 }
 
 // localConn adheres to the serverConn interface, allowing us to send syslog
