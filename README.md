@@ -5,7 +5,7 @@ Syslog client in Go with UDP/TCP and TLS transport.
 - Formater: Unix, RFC3164, RFC5424.
 - Framing support with RFC5425.
 
-This package is forked from the public archive [https://github.com/RackSec/srslog](srslog)
+This package is forked from the public archive [srslog](https://github.com/RackSec/srslog)
 
 ## Usage
 
