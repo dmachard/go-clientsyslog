@@ -5,7 +5,7 @@ Syslog client in Go with UDP/TCP and TLS transport.
 - Formater: Unix, RFC3164, RFC5424.
 - Framing support with RFC5425.
 
-Forked from https://github.com/RackSec/srslog
+This package is forked from the public archive [https://github.com/RackSec/srslog](srslog)
 
 ## Usage
 
@@ -49,7 +49,7 @@ And if you need more control over your TLS configuration :
 
 ```golang
 pool := x509.NewCertPool()
-serverCert, err := ioutil.ReadFile("/path/to/servercert.pem")
+serverCert, err := os.ReadFile("/path/to/servercert.pem")
 if err != nil {
     return nil, err
 }
