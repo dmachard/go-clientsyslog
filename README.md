@@ -99,6 +99,36 @@ w, err := DialWithCustomDialer("custom", "192.168.0.52:514", syslog.LOG_ERR, "te
 
 Your custom dial func can set timeouts, proxy connections, and do whatever else it needs before returning a net.Conn.
 
+## Custom config
+
+Set custom formatter
+
+```golang
+w, err := syslog.Dial("", "", syslog.LOG_ERR, "test")
+w.SetFormatter(syslog.RFC3164Formatter)
+```
+
+Set custom framer
+
+```golang
+w, err := syslog.Dial("", "", syslog.LOG_ERR, "test")
+w.SetFramer(syslog.RFC5425MessageLengthFramer)
+```
+
+Set custom hostname
+
+```golang
+w, err := syslog.Dial("", "", syslog.LOG_ERR, "test")
+w.SetHostname("hostname")
+```
+
+Set custom program name
+
+```golang
+w, err := syslog.Dial("", "", syslog.LOG_ERR, "test")
+w.SetProgram("program")
+```
+
 ## Running Tests
 
 Run the tests as usual:
