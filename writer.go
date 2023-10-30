@@ -11,6 +11,7 @@ type Writer struct {
 	priority  Priority
 	tag       string
 	hostname  string
+	program   string
 	network   string
 	raddr     string
 	tlsConfig *tls.Config
@@ -77,6 +78,11 @@ func (w *Writer) SetFramer(f Framer) {
 // SetHostname changes the hostname for syslog messages if needed.
 func (w *Writer) SetHostname(hostname string) {
 	w.hostname = hostname
+}
+
+// SetProgram changes the hostname for syslog messages if needed.
+func (w *Writer) SetProgram(program string) {
+	w.program = program
 }
 
 // Write sends a log message to the syslog daemon using the default priority
@@ -190,7 +196,7 @@ func (w *Writer) write(conn serverConn, p Priority, msg string) (int, error) {
 		msg += "\n"
 	}
 
-	err := conn.writeString(w.framer, w.formatter, p, w.hostname, w.tag, msg)
+	err := conn.writeString(w.framer, w.formatter, p, w.hostname, w.program, w.tag, msg)
 	if err != nil {
 		return 0, err
 	}

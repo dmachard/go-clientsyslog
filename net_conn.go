@@ -12,14 +12,14 @@ type netConn struct {
 
 // writeString formats syslog messages using time.RFC3339 and includes the
 // hostname, and sends the message to the connection.
-func (n *netConn) writeString(framer Framer, formatter Formatter, p Priority, hostname, tag, msg string) error {
+func (n *netConn) writeString(framer Framer, formatter Formatter, p Priority, hostname, program, tag, msg string) error {
 	if framer == nil {
 		framer = DefaultFramer
 	}
 	if formatter == nil {
 		formatter = DefaultFormatter
 	}
-	formattedMessage := framer(formatter(p, hostname, tag, msg))
+	formattedMessage := framer(formatter(p, hostname, program, tag, msg))
 	_, err := n.conn.Write([]byte(formattedMessage))
 	return err
 }

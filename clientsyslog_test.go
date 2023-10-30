@@ -540,13 +540,13 @@ func TestLocalConn(t *testing.T) {
 
 	lc := localConn{conn: conn}
 
-	lc.writeString(nil, nil, LOG_ERR, "hostname", "tag", "content")
+	lc.writeString(nil, nil, LOG_ERR, "hostname", "program", "tag", "content")
 
 	if len(messages) != 1 {
 		t.Errorf("should write one message")
 	}
 
-	if messages[0] != DefaultFramer(UnixFormatter(LOG_ERR, "hostname", "tag", "content")) {
+	if messages[0] != DefaultFramer(UnixFormatter(LOG_ERR, "hostname", "program", "tag", "content")) {
 		t.Errorf("should use the unix formatter")
 	}
 }
