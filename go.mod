@@ -1,3 +1,3 @@
-module github.com/dmachard/clientsyslog
+module github.com/dmachard/go-clientsyslog
 
 go 1.20
