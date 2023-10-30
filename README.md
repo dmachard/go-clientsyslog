@@ -8,7 +8,7 @@ Syslog client in Go
 
 This package is a fork of the public archive [srslog](https://github.com/RackSec/srslog)
 
-## Usage
+## Basic usage
 
 Basic usage retains the same interface as the original `syslog` package. We
 only added to the interface where required to support new functionality.
@@ -40,6 +40,8 @@ Or to unencrypted TCP:
 w, err := syslog.Dial("tcp", "192.168.0.51:514", syslog.LOG_ERR, "testtag")
 ```
 
+## TLS encryption
+
 But now you can also send messages via TLS-encrypted TCP:
 
 ```golang
@@ -62,8 +64,6 @@ config := tls.Config{
 w, err := DialWithTLSConfig(network, raddr, priority, tag, &config)
 ```
 
-(Note that in both TLS cases, this uses a self-signed certificate, where the
-remote syslog server has the keypair and the client has only the public key.)
 
 And then to write log messages, continue like so:
 
