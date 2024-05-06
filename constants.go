@@ -2,6 +2,8 @@ package clientsyslog
 
 import (
 	"errors"
+	"fmt"
+	"strings"
 )
 
 // Priority is a combination of the syslog facility and
@@ -64,5 +66,41 @@ func validatePriority(p Priority) error {
 		return errors.New("log/syslog: invalid priority")
 	} else {
 		return nil
+	}
+}
+
+func GetPriority(facility string) (Priority, error) {
+	facility = strings.ToUpper(facility)
+	switch facility {
+	// level
+	case "WARNING":
+		return LOG_WARNING, nil
+	case "NOTICE":
+		return LOG_NOTICE, nil
+	case "INFO":
+		return LOG_INFO, nil
+	case "DEBUG":
+		return LOG_DEBUG, nil
+	// facility
+	case "DAEMON":
+		return LOG_DAEMON, nil
+	case "LOCAL0":
+		return LOG_LOCAL0, nil
+	case "LOCAL1":
+		return LOG_LOCAL1, nil
+	case "LOCAL2":
+		return LOG_LOCAL2, nil
+	case "LOCAL3":
+		return LOG_LOCAL3, nil
+	case "LOCAL4":
+		return LOG_LOCAL4, nil
+	case "LOCAL5":
+		return LOG_LOCAL5, nil
+	case "LOCAL6":
+		return LOG_LOCAL6, nil
+	case "LOCAL7":
+		return LOG_LOCAL7, nil
+	default:
+		return 0, fmt.Errorf("invalid syslog priority: %s", facility)
 	}
 }
