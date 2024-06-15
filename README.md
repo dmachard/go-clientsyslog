@@ -1,4 +1,4 @@
-# clientsyslog
+# go-clientsyslog
 
 Syslog client in Go
 
@@ -18,7 +18,7 @@ Switch from the standard library:
 ```golang
 import(
     //"log/syslog"
-    syslog "github.com/dmachard/clientsyslog"
+    syslog "github.com/dmachard/go-clientsyslog"
 )
 ```
 
